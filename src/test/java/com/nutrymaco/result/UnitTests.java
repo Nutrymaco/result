@@ -72,6 +72,11 @@ public class UnitTests {
         var result = create((UnsafeRunnable) () -> {
             throw exception;
         }, "test-method");
+
+        assert result.isException();
+        assert !result.isValue();
+        assert result.exception().source().equals("test-method");
+        assert result.exception().e().equals(exception);
     }
     
 }
